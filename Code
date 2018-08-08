@@ -1,0 +1,115 @@
+
+package phonebook;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+
+public class Phonebook {
+
+    
+    public static void main(String[] args) {
+        
+        book b = new book();
+        b.menu();
+        
+    }
+    
+}
+
+class book
+{
+    Scanner s = new Scanner(System.in);
+    static HashMap<String,Integer> phonebook = new HashMap<String,Integer>();
+    public void menu()
+    {
+        while(true)
+        {
+            System.out.println("Welcome to Phonebook");
+            System.out.println("Choose your option");
+            System.out.println("#1 for Add new contact");
+            System.out.println("#2 for Search contact");
+            System.out.println("#3 for Delete contact");
+            System.out.println("#4 to show all contact");
+            System.out.println("#5 Exit");
+            
+            int option = s.nextInt();
+            
+            switch(option)
+            {
+                case 1:
+                    addContact();
+                    break;
+                case 2:
+                    searchContact();
+                    break;
+                case 3:
+                    deleteContact();
+                    break;
+                case 4:
+                    showAllContact();
+                    break;
+                case 5:
+                    System.out.println("Thnkq for using it");
+                    System.exit(0);
+            }
+            
+            
+        }
+    }
+
+    private void searchContact() {
+        System.out.println("Enter a name:");
+        String name = s.next();
+        if(phonebook.containsKey(name))
+        {
+            System.out.println("Name:"+phonebook.get(name));
+        }
+        else
+        {
+            System.out.println("Conatct not found");
+        }
+  
+    }
+
+    private void deleteContact() {
+       System.out.println("Enter name to delete contact:");
+       String name = s.next();
+       if(phonebook.containsKey(name))
+       {
+           phonebook.remove(name);
+           System.out.println("Conatct deleted");
+       }
+       else
+       {
+           System.out.println("Contact is not present");
+       }
+    }
+
+    private void addContact() {
+       
+        System.out.println("Enter the name:");
+        String name = s.next();
+        System.out.println("Enter the number:");
+        int num = s.nextInt();
+        phonebook.put(name,num);
+        System.out.println("Contact successfully added");
+    }
+
+    private void showAllContact() {
+       for(String name: phonebook.keySet())
+       {
+           if(name!=null)
+           {
+               System.out.println("Name:"+phonebook.get(name));
+           }
+           else
+           {
+               System.out.println("No contact is present");
+           }
+       }
+    }
+    
+    
+}
